@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:repalce="~{index.html :: head}">
+</head>
+<body>
+<div class="grid grid-cols-12">
+    <div th:replace="~{index.html :: header}">
+    </div>
+    <div class="col-span-12 grid grid-cols-6">
+        <div th:replace="~{index.html :: navbar}">
+        </div>
+        <div >
+            <form th:action="" th:object="${newDomain}" method="post">
+                <label class="w-full pb-2">Title : </label>
+                <input th:field="*{title}" type="text" class="w-full h-8 mb-4" />
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="w-full text-red-600"></span>
+                <label class="w-full pb-2">Summary : </label>
+                <input th:field="*{summary}"  type="number" class="w-full h-8 mb-4" />
+                <span th:if="${#fields.hasErrors('summary')}" th:errors="*{summary}" class="w-full text-red-600"></span>
+                <label class="w-full pb-2">Content : </label>
+                <input th:field="*{content}" type="text" class="w-full h-8 mb-4" />
+                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="w-full text-red-600"></span>
+                <label class="flex flex-col pb-4">
+                    <span class="pb-2">Staff : </span>
+                    <select name="category">
+                        <option th:each="category : ${staffList}" th:value="${staff.id}" th:text="${staff.staffName}"></option>
+                    </select>
+                </label>
+                <label class="flex flex-col pb-4">
+                    <span class="pb-2">Category : </span>
+                    <select name="category">
+                        <option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.cateName}"></option>
+                    </select>
+                </label>
+                <div th:if="${error}">
+                    <span th:text="${error}" class="w-full text-red-600"></span>
+                </div>
+                <button
+                        type="submit"
+                        class="w-24 h-10 text-white bg-primary m-4 rounded"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
