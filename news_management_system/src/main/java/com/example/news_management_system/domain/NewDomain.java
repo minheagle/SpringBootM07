@@ -29,7 +29,7 @@ public class NewDomain {
 
     private Date createdDate;
 
-    private StaffEntity staffEntity;
+    private long staffId;
 
-    private CategoryEntity categoryEntity;
+    private long cateId;
 }

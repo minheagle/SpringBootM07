@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home/index.html :: head}">
+</head>
+<body>
+<div class="grid grid-cols-12">
+    <div th:replace="~{home/index.html :: header}">
+    </div>
+    <div class="col-span-12 grid grid-cols-6">
+        <div th:replace="~{home/index.html :: navbar}">
+        </div>
+        <div class="col-span-5 p-4">
+            <div class="w-full bg-slate-200 rounded flex justify-center items-center">
+                <form th:action="@{/create}" th:object="${newDomain}" method="post" class="w-6/10 flex flex-col justify-start items-center">
+                    <label class="w-full pb-2">Title : </label>
+                    <input th:field="*{title}" type="text" class="w-full h-8 mb-4" />
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="w-full text-red-600"></span>
+                    <label class="w-full pb-2">Summary : </label>
+                    <input th:field="*{summary}"  type="number" class="w-full h-8 mb-4" />
+                    <span th:if="${#fields.hasErrors('summary')}" th:errors="*{summary}" class="w-full text-red-600"></span>
+                    <label class="w-full pb-2">Content : </label>
+                    <input th:field="*{contents}" type="text" class="w-full h-8 mb-4" />
+                    <span th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}" class="w-full text-red-600"></span>
+                    <label class="w-full flex flex-col pb-4">
+                        <span class="pb-2">Staff : </span>
+                        <select name="staff">
+                            <option th:each="staff : ${staffList}" th:value="${staff.staffId}" th:text="${staff.staffName}"></option>
+                        </select>
+                    </label>
+                    <label class="w-full flex flex-col pb-4">
+                        <span class="pb-2">Category : </span>
+                        <select name="category">
+                            <option th:each="category : ${categoryList}" th:value="${category.cateId}" th:text="${category.cateName}"></option>
+                        </select>
+                    </label>
+                    <div th:if="${error}">
+                        <span th:text="${error}" class="w-full text-red-600"></span>
+                    </div>
+                    <button
+                            type="submit"
+                            class="w-24 h-10 text-white bg-blue6_antd m-4 rounded"
+                    >
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
